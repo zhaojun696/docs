@@ -1,0 +1,101 @@
+
+
+services:
+  web:
+    image: nginx:latest
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 2
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+        delay: 5s  # 重启延迟时间
+        max_attempts: 3  # 最大重启尝试次数
+        window: 120s  # 评估重启策略的时间窗口
+        
+      # mode: global
+      # placement:
+      #   constraints:
+      #     - node.role == manager
+    
+    ports:
+      - "8080:80"
+    networks:
+      - my_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    
+    depends_on:
+      - db
+
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - my_network
+    deploy:
+      replicas: 1
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+      # placement:
+      #   constraints:
+      #     - node.role == worker
+
+  fast_app:
+    build: ./app  # 使用 Dockerfile 构建镜像
+    tmpfs: #储存在内存中
+      - /my_temp_dir:size=100m
+    volumes:
+      - type: volume
+        source: my_data
+        target: /data
+        read_only: true
+
+    ports:
+      - "8000:8000"
+    networks:
+      - my_network
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'  # 限制 CPU 使用为 0.5 个 CPU 核心
+          memory: '512M'  # 限制内存使用为 512 MB
+        reservations:
+          cpus: '0.25'  # 预留 0.25 个 CPU 核心
+          memory: '256M'  # 预留 256 MB 内存
+          devices:
+            - capabilities: [gpu]  # 请求 GPU 资源
+              device_ids: ['0']  # 请求特定的 GPU ID，例如 GPU 0
+
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: on-failure
+
+      logging:
+        driver: "json-file"
+        options:
+          max-size: "10m"  # 限制日志文件大小为 10 MB
+          max-file: "3"  # 最多保留 3 个日志文件
+
+volumes:
+  db_data:
+  my_data:
+
+networks:
+  my_network:
+    driver: overlay

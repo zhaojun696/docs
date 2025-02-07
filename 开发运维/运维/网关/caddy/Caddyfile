@@ -1,0 +1,3 @@
+git.buystock.top {
+    reverse_proxy 154.64.231.144:8080
+}

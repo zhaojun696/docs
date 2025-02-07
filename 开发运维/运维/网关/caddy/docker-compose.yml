@@ -1,0 +1,23 @@
+
+
+services:
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - ./index.html:/usr/share/caddy/index.html
+      - caddy_data:/data
+      - caddy_config:/config
+
+  # app1:
+  #   image: your_app1_image
+  #   expose:
+  #     - "8080"
+
+volumes:
+  caddy_data:
+  caddy_config:
