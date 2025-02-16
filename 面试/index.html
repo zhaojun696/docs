@@ -4599,28 +4599,50 @@
 </code></pre>
 <h4 id="2">2. <strong>核心模块详解</strong></h4>
 <blockquote>
-<p><strong>预处理模块</strong>
-   * <strong>文本清洗</strong> ：去除特殊字符、纠错（如拼写检查）、标准化（如时间格式统一）。
-   * <strong>分词与词性标注</strong> ：中文使用Jieba/HanLP，英文使用NLTK/Spacy。
-   * <strong>意图预分类</strong> ：快速过滤无效请求（如广告、辱骂内容）。</p>
-<p><strong>对话理解模块</strong>
-   * <strong>意图识别（Intent Detection）</strong>
-     * 技术方案：Fine-tune预训练模型（BERT）或使用 Prompting。
-     * 输出：分类标签（如“退货申请”、“账户查询”）。
-   * <strong>实体抽取（Entity Extraction）</strong>
-     * 技术方案：BERT+Span标注，或基于规则的正则匹配，或使用 Prompting。
-     * 输出：订单号、日期、产品型号等结构化信息。</p>
-<p><strong>对话管理模块</strong>
-   * <strong>上下文管理</strong> ：维护对话历史，处理指代消解（如“这个订单”指向前文）。
-   * <strong>多轮策略</strong> ：通过规则引擎决定追问、跳转或终止对话。</p>
-<p><strong>响应生成模块</strong>
-   * <strong>模板填充</strong> ：预定义回答模板（如“您的订单{订单号}已发货”），适用于高确定性场景。
-   * <strong>生成式模型</strong> ：使用llm生成自由文本，需配合内容审核模块。
-   * <strong>混合模式</strong> ：优先检索知识库，未命中时调用生成模型。</p>
-<p><strong>知识库与外部服务</strong>
-   * <strong>FAQ检索</strong> ：meisearch/duckdb实现语义相似度匹配（BM25+向量检索）。
-   * <strong>API集成</strong> ：对接订单系统（RESTful API）、数据库（MySQL/PostgreSQL）。</p>
+<p><strong>预处理模块</strong></p>
 </blockquote>
+<ul>
+<li><strong>文本清洗</strong> ：去除特殊字符、纠错（如拼写检查）、标准化（如时间格式统一）。</li>
+<li><strong>分词与词性标注</strong> ：中文使用Jieba/HanLP，英文使用NLTK/Spacy。</li>
+<li><strong>意图预分类</strong> ：快速过滤无效请求（如广告、辱骂内容）。</li>
+</ul>
+<blockquote>
+<p><strong>对话理解模块</strong></p>
+</blockquote>
+<ul>
+<li><strong>意图识别（Intent Detection）</strong><ul>
+<li>技术方案：Fine-tune预训练模型（BERT）或使用 Prompting。</li>
+<li>输出：分类标签（如“退货申请”、“账户查询”）。</li>
+</ul>
+</li>
+<li><strong>实体抽取（Entity Extraction）</strong><ul>
+<li>技术方案：BERT+Span标注，或基于规则的正则匹配，或使用 Prompting。</li>
+<li>输出：订单号、日期、产品型号等结构化信息。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>对话管理模块</strong></p>
+</blockquote>
+<ul>
+<li><strong>上下文管理</strong> ：维护对话历史，处理指代消解（如“这个订单”指向前文）。</li>
+<li><strong>多轮策略</strong> ：通过规则引擎决定追问、跳转或终止对话。</li>
+</ul>
+<blockquote>
+<p><strong>响应生成模块</strong></p>
+</blockquote>
+<ul>
+<li><strong>模板填充</strong> ：预定义回答模板（如“您的订单{订单号}已发货”），适用于高确定性场景。</li>
+<li><strong>生成式模型</strong> ：使用llm生成自由文本，需配合内容审核模块。</li>
+<li><strong>混合模式</strong> ：优先检索知识库，未命中时调用生成模型。</li>
+</ul>
+<blockquote>
+<p><strong>知识库与外部服务</strong></p>
+</blockquote>
+<ul>
+<li><strong>FAQ检索</strong> ：meisearch/duckdb实现语义相似度匹配（BM25+向量检索）。</li>
+<li><strong>API集成</strong> ：对接订单系统（RESTful API）、数据库（MySQL/PostgreSQL）。</li>
+</ul>
 
 
 
