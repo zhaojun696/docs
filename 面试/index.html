@@ -448,7 +448,7 @@
           <li class="md-nav__item">
   <a href="#52qa" class="md-nav__link">
     <span class="md-ellipsis">
-      5.2问答题格式（QA）
+      5.2问答题格式（QA）
     </span>
   </a>
   
@@ -5022,7 +5022,7 @@
           <li class="md-nav__item">
   <a href="#52qa" class="md-nav__link">
     <span class="md-ellipsis">
-      5.2问答题格式（QA）
+      5.2问答题格式（QA）
     </span>
   </a>
   
@@ -5633,10 +5633,10 @@ swift sft \
 </code></pre>
 <p>其中：</p>
 <ul>
-<li><code>&lt;span class="pre"&gt;id&lt;/span&gt;</code>是序号（可选）</li>
-<li><code>&lt;span class="pre"&gt;question&lt;/span&gt;</code>是问题</li>
-<li><code>&lt;span class="pre"&gt;A&lt;/span&gt;</code>, <code>&lt;span class="pre"&gt;B&lt;/span&gt;</code>, <code>&lt;span class="pre"&gt;C&lt;/span&gt;</code>, <code>&lt;span class="pre"&gt;D&lt;/span&gt;</code>等是可选项，最大支持10个选项</li>
-<li><code>&lt;span class="pre"&gt;answer&lt;/span&gt;</code>是正确选项</li>
+<li><code>id</code>是序号（可选）</li>
+<li><code>question</code>是问题</li>
+<li><code>A</code>, <code>B</code>, <code>C</code>, <code>D</code>等是可选项，最大支持10个选项</li>
+<li><code>answer</code>是正确选项</li>
 </ul>
 <p><strong>启动评测</strong></p>
 <p>运行下面的命令：</p>
@@ -5650,10 +5650,10 @@ swifteval\
 </code></pre>
 <p>其中：</p>
 <ul>
-<li><code>&lt;span class="pre"&gt;eval_dataset&lt;/span&gt;</code> 需要设置为 <code>&lt;span class="pre"&gt;general_mcq&lt;/span&gt;</code></li>
-<li><code>&lt;span class="pre"&gt;dataset_args&lt;/span&gt;</code> 需要设置</li>
-<li><code>&lt;span class="pre"&gt;local_path&lt;/span&gt;</code> 自定义数据集文件夹路径</li>
-<li><code>&lt;span class="pre"&gt;subset_list&lt;/span&gt;</code> 评测数据集名称，上述 <code>&lt;span class="pre"&gt;*_dev.csv&lt;/span&gt;</code> 中的 <code>&lt;span class="pre"&gt;*&lt;/span&gt;</code></li>
+<li><code>eval_dataset</code> 需要设置为 <code>general_mcq</code></li>
+<li><code>dataset_args</code> 需要设置</li>
+<li><code>local_path</code> 自定义数据集文件夹路径</li>
+<li><code>subset_list</code> 评测数据集名称，上述 <code>*_dev.csv</code> 中的 <code>*</code></li>
 </ul>
 <p><strong>运行结果</strong></p>
 <pre><code>+---------------------+-------------+-----------------+----------+-------+---------+---------+
@@ -5662,7 +5662,7 @@ swifteval\
 | Qwen2-0.5B-Instruct | general_mcq | AverageAccuracy | example  |    12 |  0.5833 | default |
 +---------------------+-------------+-----------------+----------+-------+---------+---------+
 </code></pre>
-<h4 id="52qa">5.2问答题格式（QA）<a href="https://swift.readthedocs.io/zh-cn/latest/Instruction/%E8%AF%84%E6%B5%8B.html#qa" title="Link to this heading"></a></h4>
+<h4 id="52qa">5.2问答题格式（QA）</h4>
 <p>适合用户是问答题的场景，评测指标是 <code>&lt;span class="pre"&gt;ROUGE&lt;/span&gt;</code>和 <code>&lt;span class="pre"&gt;BLEU&lt;/span&gt;</code>。</p>
 <p><strong>数据准备</strong></p>
 <p>准备一个问答题格式的jsonline文件，该目录包含了一个文件：</p>
@@ -5686,10 +5686,10 @@ swifteval\
 </code></pre>
 <p>其中：</p>
 <ul>
-<li><code>&lt;span class="pre"&gt;eval_dataset&lt;/span&gt;</code> 需要设置为 <code>&lt;span class="pre"&gt;general_qa&lt;/span&gt;</code></li>
-<li><code>&lt;span class="pre"&gt;dataset_args&lt;/span&gt;</code> 是一个json字符串，需要设置：</li>
-<li><code>&lt;span class="pre"&gt;local_path&lt;/span&gt;</code> 自定义数据集文件夹路径</li>
-<li><code>&lt;span class="pre"&gt;subset_list&lt;/span&gt;</code> 评测数据集名称，上述 <code>&lt;span class="pre"&gt;*.jsonl&lt;/span&gt;</code> 中的 <code>&lt;span class="pre"&gt;*&lt;/span&gt;</code></li>
+<li><code>eval_dataset</code> 需要设置为 <code>general_qa</code></li>
+<li><code>dataset_args</code> 是一个json字符串，需要设置：</li>
+<li><code>local_path</code> 自定义数据集文件夹路径</li>
+<li><code>subset_list</code> 评测数据集名称，上述 <code>*.jsonl</code> 中的 <code>*</code></li>
 </ul>
 <p><strong>运行结果</strong></p>
 <pre><code>+---------------------+-------------+-----------------+----------+-------+---------+---------+
