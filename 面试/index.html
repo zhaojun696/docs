@@ -320,15 +320,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.3 大模型训练全流程概览
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#14" class="md-nav__link">
     <span class="md-ellipsis">
       1.4 本课程的目标与结构
@@ -472,7 +463,16 @@
           <li class="md-nav__item">
   <a href="#61" class="md-nav__link">
     <span class="md-ellipsis">
-      6.1 部署
+      6.1 量化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 部署
     </span>
   </a>
   
@@ -4894,15 +4894,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#13" class="md-nav__link">
-    <span class="md-ellipsis">
-      1.3 大模型训练全流程概览
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#14" class="md-nav__link">
     <span class="md-ellipsis">
       1.4 本课程的目标与结构
@@ -5046,7 +5037,16 @@
           <li class="md-nav__item">
   <a href="#61" class="md-nav__link">
     <span class="md-ellipsis">
-      6.1 部署
+      6.1 量化
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#62" class="md-nav__link">
+    <span class="md-ellipsis">
+      6.2 部署
     </span>
   </a>
   
@@ -5198,15 +5198,6 @@
 <li><strong>计算资源需求</strong> ：训练大模型需要大量的GPU/TPU资源和分布式计算能力。</li>
 <li><strong>数据需求</strong> ：高质量、大规模的数据集是大模型训练的基础，但数据收集、清洗和标注成本高昂。</li>
 <li><strong>模型优化难度</strong> ：超参数调优、训练稳定性、梯度消失/爆炸等问题增加了训练难度。</li>
-</ol>
-<hr />
-<h4 id="13"><strong>1.3 大模型训练全流程概览</strong></h4>
-<ol>
-<li><strong>数据准备</strong> ：收集、清洗、标注和增强数据，构建高质量的训练数据集。</li>
-<li><strong>模型设计与选择</strong> ：选择合适的模型架构（如Transformer），确定模型规模（参数量）。</li>
-<li><strong>训练过程</strong> ：在分布式环境中进行模型训练，优化超参数，监控训练过程。</li>
-<li><strong>模型评估与调优</strong> ：通过验证集和测试集评估模型性能，进行调优和微调。</li>
-<li><strong>模型部署</strong> ：将训练好的模型导出并部署到生产环境，优化推理性能。</li>
 </ol>
 <hr />
 <h4 id="14"><strong>1.4 本课程的目标与结构</strong></h4>
@@ -5581,7 +5572,60 @@
 <p>梯度裁剪与正则化</p>
 </li>
 <li>早停策略与模型检查点</li>
+<li><strong>4.6 训练与微调的概念</strong></li>
 </ul>
+<pre><code class="language-bash">
+1. 预训练（Pre-training）
+定义：
+预训练是指在大规模无标签数据上训练模型，使其学习语言的基本结构和模式。
+
+过程：
+数据：使用大量文本数据（如网页、书籍、文章等）。
+任务：常见的预训练任务包括语言建模（如GPT的从左到右预测）、掩码语言建模（如BERT的掩码词预测）等。
+目标：通过预训练，模型能够捕捉语言的统计特性、语法规则和部分语义信息。
+
+优点：
+模型能够学习到通用的语言表示。
+减少对特定任务数据的依赖。
+
+缺点：
+需要大量计算资源和时间。
+模型可能学到数据中的偏见和不准确信息。
+
+2. 微调（Fine-tuning）
+定义：
+微调是指在预训练模型的基础上，使用特定任务的有标签数据进行进一步训练，使模型适应特定任务。
+
+过程：
+数据：使用特定任务的有标签数据（如情感分类、问答系统等）。
+任务：根据具体任务设计损失函数（如分类任务的交叉熵损失）。
+目标：通过微调，模型能够在特定任务上表现出色。
+
+优点：
+模型在特定任务上的性能显著提升。
+相对于从头训练，微调需要的计算资源和数据量较少。
+
+缺点：
+需要高质量的标注数据。
+可能出现过拟合现象。
+
+3. 人类对齐（Human Alignment）
+定义：
+人类对齐是指通过人类反馈和干预，使模型的输出更符合人类的价值观、伦理和期望。
+过程：
+数据：使用人类标注的反馈数据（如偏好数据、纠正数据等）。
+任务：设计奖励模型（Reward Model）来评估模型输出，并通过强化学习（如RLHF，Reinforcement Learning from Human Feedback）进行优化。
+目标：使模型的输出更加安全、有用和符合人类期望。
+
+优点：
+提高模型的安全性和可靠性。
+使模型更符合用户需求和社会规范。
+
+缺点：
+需要大量人类反馈数据。
+对齐过程复杂且耗时。
+
+</code></pre>
 <blockquote>
 <p>10分钟在单卡3090上对Qwen2.5-7B-Instruct进行自我认知微调：</p>
 </blockquote>
@@ -5613,6 +5657,25 @@ swift sft \
     --dataloader_num_workers 4 \
     --model_author swift \
     --model_name swift-robot
+</code></pre>
+<pre><code class="language-bash"># usage: 2*24G
+
+CUDA_VISIBLE_DEVICES=0 \
+swift rlhf \
+    --rlhf_type dpo \
+    --model_type  llama3-8b-instruct \
+    --beta 0.1 \
+    --rpo_alpha 0.1 \
+    --sft_type  lora \
+    --dataset shareai-llama3-dpo-zh-en-emoji \
+    --num_train_epochs  2  \
+    --lora_target_modules  ALL  \
+    --gradient_checkpointing  true  \
+    --batch_size  1  \
+    --learning_rate  5e-5  \
+    --gradient_accumulation_steps  16  \
+    --warmup_ratio  0.03  \
+    --save_total_limit  2
 </code></pre>
 <hr />
 <h3 id="5"><strong>5. 模型评估与调优</strong></h3>
@@ -5661,6 +5724,36 @@ swifteval\
 +=====================+=============+=================+==========+=======+=========+=========+
 | Qwen2-0.5B-Instruct | general_mcq | AverageAccuracy | example  |    12 |  0.5833 | default |
 +---------------------+-------------+-----------------+----------+-------+---------+---------+
+
+
+1. Model（模型）
+Qwen2-0.5B-Instruct：这是模型的名称。
+Qwen2：是模型系列或版本。
+0.5B：表示模型有0.5亿（500 million）个参数。
+Instruct：表示这是一个指令微调（Instruction-tuned）模型，通常用于遵循指令或生成特定类型的输出。
+
+2. Dataset（数据集）
+general_mcq：这是评估模型所使用的数据集名称。
+general：表示这是一个通用数据集。
+mcq：表示这是一个多项选择题（Multiple Choice Questions）数据集。
+
+3. Metric（评估指标）
+AverageAccuracy：这是评估模型性能的指标。
+Average：表示这是一个平均值。
+Accuracy：表示准确率，即模型预测正确的比例。
+
+4. Subset（子集）
+example：这是数据集的子集名称。
+example：表示这是一个示例子集，用于初步评估或测试。
+
+5. Num（数量）
+12：这是评估中使用的样本数量。
+12：表示在评估中使用了12个样本。
+
+6. Score（得分）
+0.5833：这是模型在评估指标上的得分。
+0.5833：表示模型在12个样本上的平均准确率为58.33%。
+
 </code></pre>
 <h4 id="52qa">5.2问答题格式（QA）</h4>
 <p>适合用户是问答题的场景，评测指标是 <code>&lt;span class="pre"&gt;ROUGE&lt;/span&gt;</code>和 <code>&lt;span class="pre"&gt;BLEU&lt;/span&gt;</code>。</p>
@@ -5721,10 +5814,140 @@ swifteval\
 +---------------------+-------------+-----------------+----------+-------+---------+---------+
 | Qwen2-0.5B-Instruct | general_qa  | rouge-l-r       | default  |    12 |  0.8889 | default |
 +---------------------+-------------+-----------------+----------+-------+---------+---------+
+
+
+
+
+1. BLEU (Bilingual Evaluation Understudy)
+BLEU 是一种用于评估机器翻译质量的指标，通过计算生成文本与参考文本之间的n-gram重叠来衡量相似度。BLEU 分数范围在0到1之间，分数越高表示生成文本与参考文本越相似。
+BLEU-1: 计算1-gram（单个词）的重叠。
+Score: 0.2324
+解释: 生成文本与参考文本在1-gram水平上有23.24%的重叠。
+
+BLEU-2: 计算2-gram（连续的两个词）的重叠。
+Score: 0.1451
+解释: 生成文本与参考文本在2-gram水平上有14.51%的重叠。
+
+BLEU-3: 计算3-gram（连续的三个词）的重叠。
+Score: 0.0625
+解释: 生成文本与参考文本在3-gram水平上有6.25%的重叠。
+
+BLEU-4: 计算4-gram（连续的四个词）的重叠。
+Score: 0.0556
+解释: 生成文本与参考文本在4-gram水平上有5.56%的重叠。
+
+2. ROUGE (Recall-Oriented Understudy for Gisting Evaluation)
+ROUGE 是一种用于评估自动摘要和机器翻译的指标，主要通过计算生成文本与参考文本之间的n-gram重叠来评估。ROUGE 分数范围在0到1之间，分数越高表示生成文本与参考文本越相似。
+ROUGE-1-F: 综合考虑1-gram的精确率（Precision）和召回率（Recall）的F1分数。
+Score: 0.3441
+解释: 生成文本与参考文本在1-gram水平上的F1分数为34.41%。
+
+ROUGE-1-P: 1-gram的精确率（Precision），即生成文本中与参考文本匹配的1-gram比例。
+Score: 0.2393
+解释: 生成文本中有23.93%的1-gram与参考文本匹配。
+
+ROUGE-1-R: 1-gram的召回率（Recall），即参考文本中与生成文本匹配的1-gram比例。
+Score: 0.8889
+解释: 参考文本中有88.89%的1-gram与生成文本匹配。
+
+ROUGE-2-F: 综合考虑2-gram的精确率（Precision）和召回率（Recall）的F1分数。
+Score: 0.2062
+解释: 生成文本与参考文本在2-gram水平上的F1分数为20.62%。
+
+ROUGE-2-P: 2-gram的精确率（Precision），即生成文本中与参考文本匹配的2-gram比例。
+Score: 0.1453
+解释: 生成文本中有14.53%的2-gram与参考文本匹配。
+
+ROUGE-2-R: 2-gram的召回率（Recall），即参考文本中与生成文本匹配的2-gram比例。
+Score: 0.6167
+解释: 参考文本中有61.67%的2-gram与生成文本匹配。
+
+ROUGE-L-F: 综合考虑最长公共子序列（LCS）的精确率（Precision）和召回率（Recall）的F1分数。
+Score: 0.333
+解释: 生成文本与参考文本在最长公共子序列水平上的F1分数为33.3%。
+
+ROUGE-L-P: 最长公共子序列（LCS）的精确率（Precision），即生成文本中与参考文本匹配的最长公共子序列比例。
+Score: 0.2324
+解释: 生成文本中有23.24%的最长公共子序列与参考文本匹配。
+
+ROUGE-L-R: 最长公共子序列（LCS）的召回率（Recall），即参考文本中与生成文本匹配的最长公共子序列比例。
+Score: 0.8889
+解释: 参考文本中有88.89%的最长公共子序列与生成文本匹配。
+
+总结
+BLEU 和 ROUGE 指标从不同角度评估了生成文本与参考文本的相似度。
+BLEU 更侧重于n-gram的重叠，而 ROUGE 更侧重于召回率，尤其是在自动摘要任务中。
+从表格中可以看出，模型在1-gram和2-gram水平上的表现较好，但随着n-gram长度的增加，重叠率逐渐降低。
+ROUGE-1-R 和 ROUGE-L-R 的召回率较高，表明生成文本能够较好地覆盖参考文本中的内容。
+
 </code></pre>
 <hr />
 <h3 id="6"><strong>6. 模型部署</strong></h3>
-<h4 id="61">6.1 部署</h4>
+<h4 id="61">6.1 量化</h4>
+<ul>
+<li><code>hqq</code> 是一种基于半二次量化的技术，通过优化量化过程中的误差分布，减少量化带来的精度损失。</li>
+<li><code>bnb</code> 是一种用于模型量化的库，支持将模型参数从高精度（如 FP32）量化到低精度（如 INT8、INT4），从而减少内存占用和计算开销。量化：将 FP32 参数映射到低精度（如 INT8）。反量化：在计算时，将低精度参数还原为 FP32 进行计算。</li>
+<li>eetq 根据目标硬件的特性（如 CPU、GPU、NPU）调整量化策略。运行时根据输入数据动态调整量化参数。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>bnb</th>
+<th>hqq</th>
+<th>eetq</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>量化精度</strong></td>
+<td>INT8、INT4、INT2</td>
+<td>支持高精度量化</td>
+<td>针对边缘设备优化</td>
+</tr>
+<tr>
+<td><strong>优点</strong></td>
+<td>显存占用低，推理速度快</td>
+<td>量化误差小，精度高</td>
+<td>低延迟，低功耗</td>
+</tr>
+<tr>
+<td><strong>缺点</strong></td>
+<td>低比特量化可能损失精度</td>
+<td>计算复杂度高</td>
+<td>量化精度可能较低</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>大模型推理、训练加速</td>
+<td>高精度要求的任务</td>
+<td>边缘设备、实时推理</td>
+</tr>
+<tr>
+<td><strong>硬件支持</strong></td>
+<td>通用硬件</td>
+<td>通用硬件</td>
+<td>边缘设备（CPU、GPU、NPU）</td>
+</tr>
+</tbody>
+</table>
+<pre><code>
+CUDA_VISIBLE_DEVICES=0 swift infer \
+    --model_type qwen1half-7b-chat \
+    --quant_method bnb \
+    --quantization_bit 4
+
+CUDA_VISIBLE_DEVICES=0 swift infer \
+    --model_type qwen1half-7b-chat \
+    --quant_method hqq \
+    --quantization_bit 4
+
+CUDA_VISIBLE_DEVICES=0 swift infer \
+    --model_type qwen1half-7b-chat \
+    --quant_method eetq \
+    --dtype fp16
+</code></pre>
+<h4 id="62">6.2 部署</h4>
 <p>以下为swift支持的推理引擎以及接入部分的相应能力，三种推理加速引擎为SWIFT的推理、部署、评测模块提供推理加速：</p>
 <table>
 <thead>
